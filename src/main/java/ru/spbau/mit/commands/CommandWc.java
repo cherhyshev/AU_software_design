@@ -21,7 +21,7 @@ public class CommandWc extends Command {
     private void handleOneArgument(InputStream is, OutputStream os) throws IOException {
         Scanner in = new Scanner(is);
         int lines = 0, words = 0;
-        int bytes = is.available();
+        int bytes = is.available() - 1;
         while (in.hasNextLine()) {
             String line = in.nextLine();
             lines++;
@@ -42,7 +42,7 @@ public class CommandWc extends Command {
             handleOneArgument(is, os);
         } else {
             for (String arg : getArgs()) {
-                handleOneArgument(new FileInputStream(new File(arg)), os);
+                handleOneArgument(new FileInputStream(new File(getCurrentDir() + '/' + arg)), os);
             }
         }
     }

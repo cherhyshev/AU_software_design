@@ -13,6 +13,6 @@ public class CommandExecute extends Command {
 
     @Override
     public void run(InputStream is, OutputStream os, Environment environment) throws IOException {
-        Runtime.getRuntime().exec(getArgs().toArray(new String[getArgs().size()]));
+        Runtime.getRuntime().exec(getArgs().toArray(new String[0]));
     }
 }

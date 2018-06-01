@@ -1,5 +1,6 @@
 package ru.spbau.mit.commands;
 
+import ru.spbau.mit.CommandException;
 import ru.spbau.mit.Environment;
 
 import java.io.*;
@@ -14,7 +15,7 @@ public class PipeCommand {
 
 
     public void run(InputStream is, OutputStream os, Environment environment)
-            throws IOException {
+            throws IOException, CommandException {
         InputStream currentInputStream = is;
         for (int i = 0; i < commands.size() - 1; i++) {
             PipedOutputStream currentOutputStream = new PipedOutputStream();

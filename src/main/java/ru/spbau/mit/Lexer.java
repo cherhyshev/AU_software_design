@@ -11,48 +11,50 @@ import java.io.IOException;
 public class Lexer {
 
     private static final Set<Character> SYMBOLS = new HashSet<>(Arrays.asList(
-            new Character[]{'\'', '"', '=', '$', '|'}
-    ));
+            '\'', '"', '=', '$', '|'));
 
     /**
      * This method divides line to list of words and service symbols
-     * @param line
-     * @return
-     * @throws IOException
+     *
+     * @param line - user-entered string
+     * @return list of tokens parsed from the user-entered string
      */
 
     public List<String> parseWords(String line) {
         List<String> lexems = new ArrayList<>();
         String[] words = line.split(" ");
         for (String word : words) {
-            String currentSubWord = "";
+            StringBuilder currentSubWord = new StringBuilder();
             for (int i = 0; i < word.length(); i++) {
                 if (SYMBOLS.contains(word.charAt(i))) {
-                    if (!currentSubWord.equals("")) {
-                        lexems.add(currentSubWord);
-                        currentSubWord = "";
+                    if (!currentSubWord.toString().isEmpty()) {
+                        lexems.add(currentSubWord.toString());
+                        currentSubWord = new StringBuilder();
                     }
                     lexems.add("" + word.charAt(i));
                 } else {
-                    currentSubWord += word.charAt(i);
+                    currentSubWord.append(word.charAt(i));
                 }
             }
-            if (!currentSubWord.equals("")) {
-                lexems.add(currentSubWord);
+            if (!currentSubWord.toString().isEmpty()) {
+                lexems.add(currentSubWord.toString());
             }
             lexems.add(" ");
         }
-        lexems.remove(lexems.size() - 1);
+        if (lexems.size() > 0) {
+            lexems.remove(lexems.size() - 1);
+        }
         return lexems;
     }
 
     /**
      * This method substitutes variables not from single quotes
      * and returns tokens after substitution
-     * @param tokens
-     * @param environment
-     * @return
-     * @throws IOException
+     *
+     * @param tokens      - list of tokens
+     * @param environment - working instance of the Environment class
+     * @return list of substituted tokens
+     * @throws IOException when no variable with such name near "$"
      */
 
     public List<String> substituteVariables(List<String> tokens, Environment environment) throws IOException {

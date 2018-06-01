@@ -67,6 +67,8 @@ public class Parser {
                 return new CommandPwd(args);
             case "wc":
                 return new CommandWc(args);
+            case "exit":
+                return new CommandExit(args);
             default:
                 args.add(0, commandName);
                 return new CommandExecute(args);
@@ -76,9 +78,10 @@ public class Parser {
     /**
      * This method parses all commands of one line from list of tokens
      * and returns list of parsed commands
-     * @param lexems
-     * @return
-     * @throws IOException
+     *
+     * @param lexems - list of tokens received from Lexer
+     * @return list of Command class instances
+     * @throws IOException when got invalid lexem near pipeline
      */
     public List<Command> parseCommands(List<String> lexems) throws IOException {
         List<Command> commands = new ArrayList<>();
@@ -92,7 +95,6 @@ public class Parser {
             }
             commands.add(command);
         }
-
         return commands;
     }
 }

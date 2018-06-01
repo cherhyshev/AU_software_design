@@ -14,7 +14,8 @@ public class CommandPwd extends Command {
     public void run(InputStream is, OutputStream os, Environment environment)
             throws IOException {
         PrintWriter out = new PrintWriter(os);
-        out.println(System.getProperty("user.dir"));
+        System.out.println(getCurrentDir());
+        out.println(getCurrentDir());
         os.flush();
     }
 }
