@@ -1,14 +1,14 @@
-from enum import Enum
+from enum import Enum, auto
 
 from utils.game_states import GameStates
 from utils.menus import character_screen, inventory_menu, level_up_menu
 
 
 class RenderOrder(Enum):
-    STAIRS = 1
-    CORPSE = 2
-    ITEM = 3
-    ACTOR = 4
+    STAIRS = auto()
+    CORPSE = auto()
+    ITEM = auto()
+    ACTOR = auto()
 
 
 def get_names_under_mouse(mouse_coordinates, entities, game_map):

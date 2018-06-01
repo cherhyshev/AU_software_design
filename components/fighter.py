@@ -1,7 +1,12 @@
 from utils.game_messages import Message
 
 
+
 class Fighter:
+    """
+    Класс описывает все боевые сущности в игре в каждый момент.
+    Хранит уровень здоровья и текущие показатели атаки/защиты
+    """
     def __init__(self, hp, defense, power, xp=0):
         self.base_max_hp = hp
         self.hp = hp

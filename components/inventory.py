@@ -2,11 +2,16 @@ from utils.game_messages import Message
 
 
 class Inventory:
+    """
+    Класс, описывающий инвентарь персонажа
+    """
+
     def __init__(self, capacity):
         self.capacity = capacity
         self.items = []
 
     def add_item(self, item, colors):
+        # Метод для добавления предмета в инвентарь
         results = []
 
         if len(self.items) >= self.capacity:
@@ -25,6 +30,7 @@ class Inventory:
         return results
 
     def use(self, item_entity, colors, **kwargs):
+        # Метод для использования предмета из инвентаря
         results = []
 
         item_component = item_entity.item
@@ -53,9 +59,11 @@ class Inventory:
         return results
 
     def remove_item(self, item):
+        # Метод для удаления предмета из инвентаря
         self.items.remove(item)
 
     def drop_item(self, item, colors):
+        # Метод для выбрасывания предмета из инвентаря
         results = []
 
         if self.owner.equipment.main_hand == item or self.owner.equipment.off_hand == item:

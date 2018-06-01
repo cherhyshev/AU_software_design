@@ -1,7 +1,10 @@
 from utils.equipment_slots import EquipmentSlots
 
-
 class Equipment:
+    """
+    Этот класс хранит информацию о том, что в данный момент
+    надето на персонажа, и какие эффекты дает экипировка
+    """
     def __init__(self, main_hand=None, off_hand=None):
         self.main_hand = main_hand
         self.off_hand = off_hand

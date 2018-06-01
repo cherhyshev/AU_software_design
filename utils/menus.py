@@ -4,6 +4,7 @@ import tdl
 
 
 def menu(con, root, header, options, width, screen_width, screen_height):
+    # Метод для
     if len(options) > 26: raise ValueError('Cannot have a menu with more than 26 options.')
 
     # calculate total height for the header (after textwrap) and one line per option
@@ -34,6 +35,7 @@ def menu(con, root, header, options, width, screen_width, screen_height):
 
 
 def inventory_menu(con, root, header, player, inventory_width, screen_width, screen_height):
+    # Метод, генерирующий меню инвентаря
     # show a menu with each item of the inventory as an option
     if len(player.inventory.items) == 0:
         options = ['Inventory is empty.']
@@ -52,13 +54,14 @@ def inventory_menu(con, root, header, player, inventory_width, screen_width, scr
 
 
 def main_menu(con, root_console, background_image, screen_width, screen_height, colors):
+    # Метод, генерирующий основное меню
     background_image.blit_2x(root_console, 0, 0)
 
     title = 'TOMBS OF THE ANCIENT KINGS'
     center = (screen_width - len(title)) // 2
     root_console.draw_str(center, screen_height // 2 - 4, title, bg=None, fg=colors.get('light_yellow'))
 
-    title = 'By (Your name here)'
+    title = 'By Chernyshev'
     center = (screen_width - len(title)) // 2
     root_console.draw_str(center, screen_height - 2, title, bg=None, fg=colors.get('light_yellow'))
 
@@ -66,6 +69,7 @@ def main_menu(con, root_console, background_image, screen_width, screen_height, 
 
 
 def level_up_menu(con, root, header, player, menu_width, screen_width, screen_height):
+    # Метод, генерирующий меню повышения уровня
     options = ['Constitution (+20 HP, from {0})'.format(player.fighter.max_hp),
                'Strength (+1 attack, from {0})'.format(player.fighter.power),
                'Agility (+1 defense, from {0})'.format(player.fighter.defense)]
@@ -75,6 +79,7 @@ def level_up_menu(con, root, header, player, menu_width, screen_width, screen_he
 
 def character_screen(root_console, player, character_screen_width, character_screen_height, screen_width,
                      screen_height):
+    # Метод, генерирующий меню характеристик персонажа
     window = tdl.Console(character_screen_width, character_screen_height)
 
     window.draw_rect(0, 0, character_screen_width, character_screen_height, None, fg=(255, 255, 255), bg=None)
@@ -93,4 +98,5 @@ def character_screen(root_console, player, character_screen_width, character_scr
 
 
 def message_box(con, root_console, header, width, screen_width, screen_height):
+    # Метод, генерирующий окно сообщений
     menu(con, root_console, header, [], width, screen_width, screen_height)

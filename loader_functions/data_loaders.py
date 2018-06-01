@@ -2,8 +2,8 @@ import os
 
 import shelve
 
-
 def save_game(player, entities, game_map, message_log, game_state):
+    # Метод, обеспечивающий сохранение игрового состояния в файл
     with shelve.open('savegame.dat', 'n') as data_file:
         data_file['player_index'] = entities.index(player)
         data_file['entities'] = entities
@@ -11,8 +11,8 @@ def save_game(player, entities, game_map, message_log, game_state):
         data_file['message_log'] = message_log
         data_file['game_state'] = game_state
 
-
 def load_game():
+    # Метод, обеспечивающий загрузку игрового состояния из файла
     if not os.path.isfile('savegame.dat'):
         raise FileNotFoundError
 

@@ -17,7 +17,10 @@ from utils.map_utils import GameMap, make_map
 from utils.render_functions import RenderOrder
 
 
+
 def get_constants():
+    # Метод для инициализации дефолтных значений,
+    # используемых в параметрах игры
     window_title = 'Roguelike by Chernyshev'
 
     screen_width = 80
@@ -98,6 +101,7 @@ def get_constants():
 
 
 def get_game_variables(constants):
+    # Метод, инициализирующий начальное состояние игрового мира
     fighter_component = Fighter(hp=100, defense=1, power=2)
     inventory_component = Inventory(26)
     level_component = Level()

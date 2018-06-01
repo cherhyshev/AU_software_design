@@ -2,6 +2,10 @@ from enum import Enum, auto
 
 
 class GameStates(Enum):
+    """
+    Перечень состояний, в которых
+    может находиться персонаж
+    """
     PLAYERS_TURN = auto()
     ENEMY_TURN = auto()
     PLAYER_DEAD = auto()

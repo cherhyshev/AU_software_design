@@ -2,6 +2,8 @@ from utils.game_states import GameStates
 
 
 def handle_keys(user_input, game_state):
+    # Метод, который, в зависимости от состояния персонажа,
+    # меняет назначение клавиш
     if user_input:
         if game_state == GameStates.PLAYERS_TURN:
             return handle_player_turn_keys(user_input)
@@ -18,15 +20,17 @@ def handle_keys(user_input, game_state):
 
     return {}
 
-
 def handle_targeting_keys(user_input):
+    # Метод, отменяющий наведение мышью
+    # при наложении заклинания
     if user_input.key == 'ESCAPE':
         return {'exit': True}
 
     return {}
 
-
 def handle_mouse(mouse_event):
+    # Метод, принимающий клики мышью
+    # при наложении заклинания
     if mouse_event:
         (x, y) = mouse_event.cell
 
@@ -37,8 +41,9 @@ def handle_mouse(mouse_event):
 
     return {}
 
-
 def handle_player_turn_keys(user_input):
+    # Метод, переводящий нажатие клавиш
+    # в движение персонажа
     key_char = user_input.char
 
     # Movement keys
@@ -87,8 +92,8 @@ def handle_player_turn_keys(user_input):
     # No key was pressed
     return {}
 
-
 def handle_player_dead_keys(user_input):
+    # Управление мертвым персонажем
     key_char = user_input.char
 
     if key_char == 'i':
@@ -104,8 +109,8 @@ def handle_player_dead_keys(user_input):
     # No key was pressed
     return {}
 
-
 def handle_inventory_keys(user_input):
+    # Управление персонажем в окне инвентаря
     if not user_input.char:
         return {}
 
@@ -123,8 +128,8 @@ def handle_inventory_keys(user_input):
 
     return {}
 
-
 def handle_main_menu(user_input):
+    # Управление в основном меню
     if user_input:
         key_char = user_input.char
 
@@ -137,8 +142,8 @@ def handle_main_menu(user_input):
 
     return {}
 
-
 def handle_level_up_menu(user_input):
+    # Управление в меню повышения уровня
     if user_input:
         key_char = user_input.char
 
@@ -151,8 +156,8 @@ def handle_level_up_menu(user_input):
 
     return {}
 
-
 def handle_character_screen(user_input):
+    # Управление в меню характеристик
     if user_input.key == 'ESCAPE':
         return {'exit': True}
 

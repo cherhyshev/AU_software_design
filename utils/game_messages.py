@@ -2,12 +2,22 @@ import textwrap
 
 
 class Message:
+    """
+    Класс, описывающий сообщение в специальном окне
+    в правом нижнем углу
+    """
+
     def __init__(self, text, color=(255, 255, 255)):
         self.text = text
         self.color = color
 
 
 class MessageLog:
+    """
+    Класс, описывающий лог сообщений в специальном окне
+    в правом нижнем углу
+    """
+
     def __init__(self, x, width, height):
         self.messages = []
         self.x = x

@@ -4,6 +4,11 @@ from utils.game_messages import Message
 
 
 class BasicMonster:
+    """
+    Класс, описывающий поведения противника
+    в обычном состоянии
+    """
+
     def take_turn(self, target, game_map, entities):
         results = []
 
@@ -21,6 +26,10 @@ class BasicMonster:
 
 
 class ConfusedMonster:
+    """
+    Класс, описывающий поведения противника
+    под действием заклинания путаницы
+    """
     def __init__(self, previous_ai, number_of_turns=10):
         self.previous_ai = previous_ai
         self.number_of_turns = number_of_turns
