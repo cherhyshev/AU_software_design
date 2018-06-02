@@ -1,20 +1,28 @@
 import org.junit.jupiter.api.Test;
-import ru.spbau.mit.*;
+import ru.spbau.mit.CommandException;
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.Lexer;
+import ru.spbau.mit.Parser;
 import ru.spbau.mit.commands.Command;
+import ru.spbau.mit.commands.CommandGrep;
 import ru.spbau.mit.commands.PipeCommand;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestCommands {
-    Lexer lexer = new Lexer();
-    Parser parser = new Parser();
-    Environment environment = new Environment();
+class TestCommands {
+    private Lexer lexer = new Lexer();
+    private Parser parser = new Parser();
+    private Environment environment = new Environment();
 
     @Test
     void testPwd() throws IOException, CommandException {
@@ -53,5 +61,59 @@ public class TestCommands {
         PipeCommand pipeCommand = new PipeCommand(commands);
         pipeCommand.run(System.in, System.out, environment);
         assertEquals("5 5 42", b.toString().trim());
+    }
+
+    @Test
+    void simpleString() throws Exception {
+        List<String> myArgs = new ArrayList<String>();
+        myArgs.add("str");
+        final CommandGrep command = new CommandGrep(myArgs);
+        final ByteArrayOutputStream data = new ByteArrayOutputStream();
+        data.write("string\nnewline\nsubstring\n".getBytes());
+        data.flush();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        command.run(new ByteArrayInputStream(data.toByteArray()), outputStream, null);
+        final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        assertEquals(0, errorStream.size());
+        assertEquals("string\nsubstring\n", outputStream.toString(String.valueOf(Charset.defaultCharset())));
+    }
+
+    @Test
+    void caseInsensitiveParam() throws Exception {
+        List<String> myArgs = new ArrayList<String>(Arrays.asList("-i", "Str"));
+        final CommandGrep command = new CommandGrep(myArgs);
+        final ByteArrayOutputStream data = new ByteArrayOutputStream();
+        data.write("string\nnewline\nsUbsTring\n".getBytes());
+        data.flush();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        command.run(new ByteArrayInputStream(data.toByteArray()), outputStream, null);
+        assertEquals("string\nsUbsTring\n", outputStream.toString(String.valueOf(Charset.defaultCharset())));
+    }
+
+    @Test
+    void wholeWordsParam() throws Exception {
+        List<String> myArgs = new ArrayList<String>(Arrays.asList("-w", "str"));
+        final CommandGrep command = new CommandGrep(myArgs);
+        final ByteArrayOutputStream data = new ByteArrayOutputStream();
+        data.write("string\nsub str ing\nsubstring\n".getBytes());
+        data.flush();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        command.run(new ByteArrayInputStream(data.toByteArray()), outputStream, null);
+        assertEquals("sub str ing\n", outputStream.toString(String.valueOf(Charset.defaultCharset())));
+    }
+
+    @Test
+    void additionalLinesParam() throws Exception {
+        List<String> myArgs = new ArrayList<String>(Arrays.asList("-A", "1", "abc"));
+        final CommandGrep command = new CommandGrep(myArgs);
+        final ByteArrayOutputStream data = new ByteArrayOutputStream();
+        data.write("abc\ndef\nghi\n".getBytes());
+        data.flush();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        command.run(new ByteArrayInputStream(data.toByteArray()), outputStream, null);
+        assertEquals("abc\ndef\n", outputStream.toString(String.valueOf(Charset.defaultCharset())));
     }
 }

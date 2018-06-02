@@ -69,6 +69,8 @@ public class Parser {
                 return new CommandWc(args);
             case "exit":
                 return new CommandExit(args);
+            case "grep":
+                return new CommandGrep(args);
             default:
                 args.add(0, commandName);
                 return new CommandExecute(args);

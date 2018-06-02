@@ -1,10 +1,8 @@
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import ru.spbau.mit.Environment;
 import ru.spbau.mit.Lexer;
-import ru.spbau.mit.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestLexer {
     Lexer lexer = new Lexer();
