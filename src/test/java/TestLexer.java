@@ -1,19 +1,20 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import ru.spbau.mit.Lexer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+
 
 public class TestLexer {
-    Lexer lexer = new Lexer();
+    private Lexer lexer = new Lexer();
 
     @Test
-    void testEmptyString() {
+    public void testEmptyString() {
         assertTrue(lexer.parseWords("").isEmpty());
     }
 
     @Test
-    void testSymbols() {
+    public void testSymbols() {
         assertEquals("[a,  , =,  , \", \",  , |,  , 1234567890asdfghjkl;;zxcvbnm,../qwertyuiop[]]",
                 lexer.parseWords("a = \"\" | 1234567890asdfghjkl;;zxcvbnm,../qwertyuiop[]").toString());
     }

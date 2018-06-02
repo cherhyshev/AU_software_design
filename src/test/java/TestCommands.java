@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import ru.spbau.mit.CommandException;
 import ru.spbau.mit.Environment;
 import ru.spbau.mit.Lexer;
@@ -17,15 +17,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-class TestCommands {
+
+public class TestCommands {
     private Lexer lexer = new Lexer();
     private Parser parser = new Parser();
     private Environment environment = new Environment();
 
     @Test
-    void testPwd() throws IOException, CommandException {
+    public void testPwd() throws IOException, CommandException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         System.setOut(new PrintStream(b, true));
         List<String> tokens = lexer.parseWords("pwd");
@@ -39,7 +40,7 @@ class TestCommands {
     }
 
     @Test
-    void testEchoWcPipe() throws IOException, CommandException {
+    public void testEchoWcPipe() throws IOException, CommandException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         System.setOut(new PrintStream(b, true));
         List<String> tokens = lexer.parseWords("echo 123 | wc");
@@ -52,7 +53,7 @@ class TestCommands {
     }
 
     @Test
-    void testCatWcPipe() throws IOException, CommandException {
+    public void testCatWcPipe() throws IOException, CommandException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         System.setOut(new PrintStream(b, true));
         List<String> tokens = lexer.parseWords("cat catwc | wc");
@@ -64,7 +65,7 @@ class TestCommands {
     }
 
     @Test
-    void simpleString() throws Exception {
+    public void simpleString() throws Exception {
         List<String> myArgs = new ArrayList<String>();
         myArgs.add("str");
         final CommandGrep command = new CommandGrep(myArgs);
@@ -79,7 +80,7 @@ class TestCommands {
     }
 
     @Test
-    void caseInsensitiveParam() throws Exception {
+    public void caseInsensitiveParam() throws Exception {
         List<String> myArgs = new ArrayList<String>(Arrays.asList("-i", "Str"));
         final CommandGrep command = new CommandGrep(myArgs);
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
@@ -92,7 +93,7 @@ class TestCommands {
     }
 
     @Test
-    void wholeWordsParam() throws Exception {
+    public void wholeWordsParam() throws Exception {
         List<String> myArgs = new ArrayList<String>(Arrays.asList("-w", "str"));
         final CommandGrep command = new CommandGrep(myArgs);
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
@@ -105,7 +106,7 @@ class TestCommands {
     }
 
     @Test
-    void additionalLinesParam() throws Exception {
+    public void additionalLinesParam() throws Exception {
         List<String> myArgs = new ArrayList<String>(Arrays.asList("-A", "1", "abc"));
         final CommandGrep command = new CommandGrep(myArgs);
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
