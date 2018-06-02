@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from utils.game_messages import Message
 
 
@@ -11,7 +14,12 @@ class Inventory:
         self.items = []
 
     def add_item(self, item, colors):
-        # Метод для добавления предмета в инвентарь
+        """
+        Метод для добавления предмета в инвентарь
+        :param item:
+        :param colors:
+        :return:
+        """
         results = []
 
         if len(self.items) >= self.capacity:
@@ -30,7 +38,14 @@ class Inventory:
         return results
 
     def use(self, item_entity, colors, **kwargs):
-        # Метод для использования предмета из инвентаря
+        """
+        Метод для использования предмета из инвентаря
+        :param item_entity:
+        :param colors:
+        :param kwargs:
+        :return:
+        """
+
         results = []
 
         item_component = item_entity.item
@@ -47,7 +62,7 @@ class Inventory:
             if item_component.targeting and not (kwargs.get('target_x') or kwargs.get('target_y')):
                 results.append({'targeting': item_entity})
             else:
-                kwargs = {**item_component.function_kwargs, **kwargs}
+                # kwargs = {**item_component.function_kwargs, **kwargs}
                 item_use_results = item_component.use_function(self.owner, colors, **kwargs)
 
                 for item_use_result in item_use_results:
@@ -59,11 +74,20 @@ class Inventory:
         return results
 
     def remove_item(self, item):
-        # Метод для удаления предмета из инвентаря
+        """
+        Метод для удаления предмета из инвентаря
+        :param item:
+        :return:
+        """
         self.items.remove(item)
 
     def drop_item(self, item, colors):
-        # Метод для выбрасывания предмета из инвентаря
+        """
+        Метод для выбрасывания предмета из инвентаря
+        :param item:
+        :param colors:
+        :return:
+        """
         results = []
 
         if self.owner.equipment.main_hand == item or self.owner.equipment.off_hand == item:

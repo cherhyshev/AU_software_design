@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from enum import Enum, auto
 
 from utils.game_states import GameStates
@@ -22,7 +25,21 @@ def get_names_under_mouse(mouse_coordinates, entities, game_map):
 
 
 def render_bar(panel, x, y, total_width, name, value, maximum, bar_color, back_color, string_color):
-    # Render a bar (HP, experience, etc). first calculate the width of the bar
+    """
+    Render a bar (HP, experience, etc). first calculate the width of the bar
+
+    :param panel:
+    :param x:
+    :param y:
+    :param total_width:
+    :param name:
+    :param value:
+    :param maximum:
+    :param bar_color:
+    :param back_color:
+    :param string_color:
+    :return:
+    """
     bar_width = int(float(value) / maximum * total_width)
 
     # Render the background first
@@ -41,7 +58,27 @@ def render_bar(panel, x, y, total_width, name, value, maximum, bar_color, back_c
 
 def render_all(con, panel, entities, player, game_map, fov_recompute, root_console, message_log, screen_width,
                screen_height, bar_width, panel_height, panel_y, mouse_coordinates, colors, game_state):
-    # Draw all the tiles in the game map
+    """
+    Draw all the tiles in the game map
+
+    :param con:
+    :param panel:
+    :param entities:
+    :param player:
+    :param game_map:
+    :param fov_recompute:
+    :param root_console:
+    :param message_log:
+    :param screen_width:
+    :param screen_height:
+    :param bar_width:
+    :param panel_height:
+    :param panel_y:
+    :param mouse_coordinates:
+    :param colors:
+    :param game_state:
+    :return:
+    """
     if fov_recompute:
         for x, y in game_map:
             wall = not game_map.transparent[x, y]
@@ -112,5 +149,11 @@ def draw_entity(con, entity, game_map):
 
 
 def clear_entity(con, entity):
-    # erase the character that represents this object
+    """
+    erase the character that represents this object
+
+    :param con:
+    :param entity:
+    :return:
+    """
     con.draw_char(entity.x, entity.y, ' ', entity.color, bg=None)

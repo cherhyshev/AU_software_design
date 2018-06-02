@@ -1,4 +1,7 @@
-from numpy.random import choice
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import numpy as np
 
 
 def from_dungeon_level(table, dungeon_level):
@@ -15,4 +18,4 @@ def random_choice_from_dict(choice_dict):
 
     decimal_chances = [chance / sum(chances) for chance in chances]
 
-    return choice(choices, p=decimal_chances)
+    return np.random.choice(choices, p=decimal_chances)

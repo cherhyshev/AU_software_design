@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class Level:
     """
     Класс, описывающий уровень персонажа и опыт,

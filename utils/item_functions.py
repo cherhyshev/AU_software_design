@@ -1,9 +1,19 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from components.ai import ConfusedMonster
 
 from utils.game_messages import Message
 
+
 def heal(*args, **kwargs):
-    # Метод, обеспечивающий действие хила на персонажа
+    """
+    Метод, обеспечивающий действие хила на персонажа
+    :param args:
+    :param kwargs:
+    :return:
+    """
+
     entity = args[0]
     colors = args[1]
     amount = kwargs.get('amount')
@@ -18,8 +28,14 @@ def heal(*args, **kwargs):
 
     return results
 
+
 def cast_lightning(*args, **kwargs):
-    # Метод, обеспечивающий действие заклинания молнии на противника
+    """
+    Метод, обеспечивающий действие заклинания молнии на противника
+    :param args:
+    :param kwargs:
+    :return:
+    """
     caster = args[0]
     colors = args[1]
     entities = kwargs.get('entities')
@@ -50,8 +66,14 @@ def cast_lightning(*args, **kwargs):
 
     return results
 
+
 def cast_fireball(*args, **kwargs):
-    # Метод, обеспечивающий действие заклинания огненного шара на противника
+    """
+    Метод, обеспечивающий действие заклинания огненного шара на противника
+    :param args:
+    :param kwargs:
+    :return:
+    """
     colors = args[1]
     entities = kwargs.get('entities')
     game_map = kwargs.get('game_map')
@@ -79,8 +101,14 @@ def cast_fireball(*args, **kwargs):
 
     return results
 
+
 def cast_confuse(*args, **kwargs):
-    # Метод, обеспечивающий действие заклинания путаницы на противника
+    """
+    Метод, обеспечивающий действие заклинания путаницы на противника
+    :param args:
+    :param kwargs:
+    :return:
+    """
     colors = args[1]
     entities = kwargs.get('entities')
     game_map = kwargs.get('game_map')

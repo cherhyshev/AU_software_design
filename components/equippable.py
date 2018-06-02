@@ -1,8 +1,12 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class Equippable:
     """
     Класс надеваемых объектов, которые добавляют бонусы
     к здоровью, атаке и защите
     """
+
     def __init__(self, slot, power_bonus=0, defense_bonus=0, max_hp_bonus=0):
         self.slot = slot
         self.power_bonus = power_bonus

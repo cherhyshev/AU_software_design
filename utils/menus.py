@@ -1,10 +1,24 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import textwrap
 
 import tdl
 
 
 def menu(con, root, header, options, width, screen_width, screen_height):
-    # Метод для
+    """
+    Метод для отрисовки меню
+
+    :param con:
+    :param root:
+    :param header:
+    :param options:
+    :param width:
+    :param screen_width:
+    :param screen_height:
+    :return:
+    """
     if len(options) > 26: raise ValueError('Cannot have a menu with more than 26 options.')
 
     # calculate total height for the header (after textwrap) and one line per option
@@ -35,7 +49,17 @@ def menu(con, root, header, options, width, screen_width, screen_height):
 
 
 def inventory_menu(con, root, header, player, inventory_width, screen_width, screen_height):
-    # Метод, генерирующий меню инвентаря
+    """
+    Метод, генерирующий меню инвентаря
+    :param con:
+    :param root:
+    :param header:
+    :param player:
+    :param inventory_width:
+    :param screen_width:
+    :param screen_height:
+    :return:
+    """
     # show a menu with each item of the inventory as an option
     if len(player.inventory.items) == 0:
         options = ['Inventory is empty.']
@@ -54,7 +78,16 @@ def inventory_menu(con, root, header, player, inventory_width, screen_width, scr
 
 
 def main_menu(con, root_console, background_image, screen_width, screen_height, colors):
-    # Метод, генерирующий основное меню
+    """
+    Метод, генерирующий основное меню
+    :param con:
+    :param root_console:
+    :param background_image:
+    :param screen_width:
+    :param screen_height:
+    :param colors:
+    :return:
+    """
     background_image.blit_2x(root_console, 0, 0)
 
     title = 'TOMBS OF THE ANCIENT KINGS'
@@ -69,7 +102,17 @@ def main_menu(con, root_console, background_image, screen_width, screen_height, 
 
 
 def level_up_menu(con, root, header, player, menu_width, screen_width, screen_height):
-    # Метод, генерирующий меню повышения уровня
+    """
+    Метод, генерирующий меню повышения уровня
+    :param con:
+    :param root:
+    :param header:
+    :param player:
+    :param menu_width:
+    :param screen_width:
+    :param screen_height:
+    :return:
+    """
     options = ['Constitution (+20 HP, from {0})'.format(player.fighter.max_hp),
                'Strength (+1 attack, from {0})'.format(player.fighter.power),
                'Agility (+1 defense, from {0})'.format(player.fighter.defense)]
@@ -98,5 +141,14 @@ def character_screen(root_console, player, character_screen_width, character_scr
 
 
 def message_box(con, root_console, header, width, screen_width, screen_height):
-    # Метод, генерирующий окно сообщений
+    """
+    # Метод, отрисовывающий окно сообщений
+    :param con:
+    :param root_console:
+    :param header:
+    :param width:
+    :param screen_width:
+    :param screen_height:
+    :return:
+    """
     menu(con, root_console, header, [], width, screen_width, screen_height)

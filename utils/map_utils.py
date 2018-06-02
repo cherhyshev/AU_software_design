@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from random import randint
 
 from tdl.map import Map
@@ -20,6 +23,7 @@ class GameMap(Map):
     Класс, предназначенный для создания уровня карты,
     при создании скрывается видимость
     """
+
     def __init__(self, width, height, dungeon_level=1):
         super().__init__(width, height)
         self.explored = [[False for y in range(height)] for x in range(width)]
@@ -46,6 +50,13 @@ class Rect:
 
 
 def create_room(game_map, room):
+    """
+    Метод, создающий комнату
+    :param game_map:
+    :param room:
+    :return:
+    """
+
     # go through the tiles in the rectangle and make them passable
     for x in range(room.x1 + 1, room.x2):
         for y in range(room.y1 + 1, room.y2):
@@ -54,24 +65,48 @@ def create_room(game_map, room):
 
 
 def create_h_tunnel(game_map, x1, x2, y):
-    # Метод, генерирующий горизонтальные туннели
-    # между комнатами на карте
+    """
+    Метод, генерирующий горизонтальные туннели
+    между комнатами на карте
+
+    :param game_map:
+    :param x1:
+    :param x2:
+    :param y:
+    :return:
+    """
     for x in range(min(x1, x2), max(x1, x2) + 1):
         game_map.walkable[x, y] = True
         game_map.transparent[x, y] = True
 
 
 def create_v_tunnel(game_map, y1, y2, x):
-    # Метод, генерирующий вертикальные туннели
-    # между комнатами на карте
+    """
+    Метод, генерирующий вертикальные туннели
+    между комнатами на карте
+    :param game_map:
+    :param y1:
+    :param y2:
+    :param x:
+    :return:
+    """
+
     for y in range(min(y1, y2), max(y1, y2) + 1):
         game_map.walkable[x, y] = True
         game_map.transparent[x, y] = True
 
 
 def place_entities(room, entities, dungeon_level, colors):
-    # Метод, генерирующий игровые сущности
-    # в конкретной комнате на карте
+    """
+    Метод, генерирующий игровые сущности
+    в конкретной комнате на карте
+    :param room:
+    :param entities:
+    :param dungeon_level:
+    :param colors:
+    :return:
+    """
+
     max_monsters_per_room = from_dungeon_level([[2, 1], [3, 4], [5, 6]], dungeon_level)
     max_items_per_room = from_dungeon_level([[1, 1], [2, 4]], dungeon_level)
 
@@ -152,10 +187,22 @@ def place_entities(room, entities, dungeon_level, colors):
             entities.append(item)
 
 
-
 def make_map(game_map, max_rooms, room_min_size, room_max_size, map_width, map_height, player, entities, colors):
-    # Метод, генерирующий карту и размещающий игрока
-    # в центре первой сгенерированной комнаты
+    """
+    Метод, генерирующий карту и размещающий игрока
+    в центре первой сгенерированной комнаты
+    :param game_map:
+    :param max_rooms:
+    :param room_min_size:
+    :param room_max_size:
+    :param map_width:
+    :param map_height:
+    :param player:
+    :param entities:
+    :param colors:
+    :return:
+    """
+
     rooms = []
     num_rooms = 0
 
@@ -223,7 +270,15 @@ def make_map(game_map, max_rooms, room_min_size, room_max_size, map_width, map_h
 
 
 def next_floor(player, message_log, dungeon_level, constants):
-    # Метод, обеспечивающий переход на новый уровень карты
+    """
+    Метод, обеспечивающий переход на новый уровень карты
+
+    :param player:
+    :param message_log:
+    :param dungeon_level:
+    :param constants:
+    :return:
+    """
     game_map = GameMap(constants['map_width'], constants['map_height'], dungeon_level)
     entities = [player]
 
